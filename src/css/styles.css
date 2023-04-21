@@ -40,6 +40,8 @@ button {
   display: block;
 }
 
+
+
 button:disabled {
   background-color: #c1c1c1;
   cursor: not-allowed;
@@ -104,3 +106,11 @@ a {
   flex-direction: column;
   text-decoration: none;
 }
+
+
+.load-more {
+  /* margin: 0 auto; */
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  }

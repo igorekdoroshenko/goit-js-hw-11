@@ -37,14 +37,14 @@ refs.gallery.addEventListener('click', event => {
 
 loadMoreBtn.button.addEventListener('click', fetchArticles);
 
-function handleScroll() {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+// function handleScroll() {
+//   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  console.log(scrollTop, scrollHeight, clientHeight);
-  if (scrollTop + clientHeight >= scrollHeight - 5) {
-    fetchArticles();
-  }
-}
+//   console.log(scrollTop, scrollHeight, clientHeight);
+//   if (scrollTop + clientHeight >= scrollHeight - 5) {
+//     fetchArticles();
+//   }
+// }
 
 window.addEventListener("scroll", handleScroll);
 
