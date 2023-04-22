@@ -14,6 +14,7 @@ export default class PixabayApiService {
     const url = `${PixabayApiService.POINTHTTP}?key=${PixabayApiService.API_KEY}&q=${this.query}&per_page=${this.per_page}&page=${this.page}&image_type=photo&orientation=horizontal&safesearch=true`;
 
     const { data } = await axios.get(url);
+    this.totalHits = data.totalHits;
     this.incrementPage();
 
     return data;

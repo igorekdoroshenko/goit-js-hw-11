@@ -27,13 +27,13 @@ const loadMoreBtn = new LoadMoreBtn({
 
 refs.form.addEventListener('submit', onSubmit);
 
-refs.gallery.addEventListener('click', event => {
-  event.preventDefault(); // Забороняємо дію за замовчуванням
-  if (event.target.tagName === 'IMG') {
-    const imgUrl = event.target.dataset.largeImage; // Отримуємо URL великого зображення з атрибута data-large-image
-    new SimpleLightbox({ source: imgUrl }).show(); // Показуємо велике зображення в модальному вікні
-  }
-});
+// refs.gallery.addEventListener('click', event => {
+//   event.preventDefault(); // Забороняємо дію за замовчуванням
+//   if (event.target.tagName === 'IMG') {
+//     const imgUrl = event.target.dataset.largeImage; // Отримуємо URL великого зображення з атрибута data-large-image
+//     new SimpleLightbox({ source: imgUrl }).show(); // Показуємо велике зображення в модальному вікні
+//   }
+// });
 
 loadMoreBtn.button.addEventListener('click', fetchArticles);
 
@@ -46,7 +46,7 @@ loadMoreBtn.button.addEventListener('click', fetchArticles);
 //   }
 // }
 
-window.addEventListener("scroll", handleScroll);
+// window.addEventListener("scroll", handleScroll);
 
 
 //Функція submit
@@ -74,12 +74,11 @@ async function fetchArticles() {
     
         const hitsCount = refs.gallery.querySelectorAll('.photo-card').length;
         const totalCount = pixabayApiService.totalHits;
-        if (hitsCount >= totalCount) {
+        if (hitsCount > 0 && hitsCount >= totalCount) {
           loadMoreBtn.hide();
           Notiflix.Notify.info(
             "We're sorry, but you've reached the end of search results."
           );
-          
         }
   } catch (err) {
     onError(err);
@@ -148,6 +147,17 @@ function updateGalleryList(markup) {
     refs.gallery.insertAdjacentHTML('beforeend', markup);
   }
   lightbox.refresh();
+
+  // const hitsCount = refs.gallery.querySelectorAll('.photo-card').length;
+  // console.log(hitsCount);
+  // const totalCount = pixabayApiService.totalHits;
+  // console.log(totalCount);
+  //  if (hitsCount >= totalCount) {
+  //    loadMoreBtn.hide();
+  //              Notiflix.Notify.info(
+  //                "We're sorry, but you've reached the end of search results."
+  //              );
+  //  }
 }
 //Функція очистки плейл-листа
 function clearGalleryList() {
@@ -159,7 +169,7 @@ function onError(err) {
   loadMoreBtn.hide();
 
   clearGalleryList();
-  updateGalleryList('<p>Not found!</p>');
+  updateGalleryList();
 }
 
 
